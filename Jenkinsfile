@@ -5,7 +5,7 @@ pipeline {
     }
     
     tools{
-        maven "Maven3Chandra"
+        maven "Maven3Chandra",
         java "Java17Chandra"
     }
 
