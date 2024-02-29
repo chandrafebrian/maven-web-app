@@ -19,7 +19,7 @@ pipeline {
 
         stage('Checkout from SCM') {
             steps {
-               git branch: 'main', creadentialsId: 'github-chan', url: 'https://github.com/chandrafebrian/maven-web-app'
+               git branch: 'main', credentialsId: 'github-chan', url: 'https://github.com/chandrafebrian/maven-web-app'
             }
         }
         stage('Build Application') {
