@@ -5,8 +5,8 @@ pipeline {
     }
     
     tools{
-        maven "Maven3Chandra",
-        java "Java17Chandra"
+        maven "Maven3Chandra"
+        jdk "Java17Chandra"
     }
 
     stages {
