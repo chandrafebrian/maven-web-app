@@ -1,33 +1,47 @@
 pipeline {
   
     agent {
-        label 'Ansible-Node'
+        label 'jenkins-agent'
     }
     
     tools{
-        maven "Maven-3.9.6"
+        maven "Maven3Chandra"
+        java "Java17Chandra"
     }
 
     stages {
-        stage('Clone') {
+
+        stage('Clean Workspace') {
             steps {
-               git 'https://github.com/ashokitschool/maven-web-app.git'
+                CleanWs()
             }
         }
-        stage('Build') {
+
+        stage('Checkout from SCM') {
+            steps {
+               git branch: 'main', creadentialsId: 'github-chan', url: 'https://github.com/chandrafebrian/maven-web-app'
+            }
+        }
+        stage('Build Application') {
             steps {
                sh 'mvn clean package'
             }
         }
-        
-        stage('Create Image'){
-            steps{
-               steps {
-                	script {
-                		sh 'ansible-playbook task.yml'
-                	}
-                }
+
+        stage('Test Application') {
+            steps {
+                sh 'mvn test'
             }
         }
+        
+        // stage('Create Image'){
+        //     steps{
+        //        steps {
+        //         	script {
+        //         		sh 'ansible-playbook task.yml'
+        //         	}
+        //         }
+        //     }
+        // }
     }
 }
